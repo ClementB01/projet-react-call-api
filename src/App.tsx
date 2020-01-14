@@ -1,23 +1,21 @@
 import React from 'react';
 import './App.css';
 
-type Pokemons = {
-  count: number,
-  next: string,
-  previous: null,
+type Character = {
   results: Array<{
+    id: number
     name: string
-    url: string
+    image: string
   }>
 }
 
-const getPokemons = () =>
-  fetch(`https://pokeapi.co/api/v2/pokemon`, {
+const getCharacters = () =>
+  fetch(`https://rickandmortyapi.com/api/character/`, {
     headers: { Accept: 'application/json' },
-  }).then<Pokemons>(res => res.json())
+  }).then<Character>(res => res.json())
 
 const App: React.FC = () => {
-  const [pokemons, setPokemons] = React.useState<Pokemons| null>(null)
+  const [characters, setCharacters] = React.useState<Character| null>(null)
   const [loading, setLoading] = React.useState(false)
   const [page, setPage] = React.useState(1)
 
@@ -25,9 +23,9 @@ const App: React.FC = () => {
     let cancel = false
     setLoading(true)
 
-    getPokemons(/*page*/).then(data => {
+    getCharacters(/*page*/).then(data => {
       if (!cancel) {
-        setPokemons(data)
+        setCharacters(data)
         setLoading(false)
       }
     })
@@ -42,7 +40,7 @@ const App: React.FC = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          pokemons && pokemons.results.map(pokemon => <p key={pokemon.name}>{pokemon.name}</p>)
+          characters && characters.results.map(character => <p key={character.id}><img src={character.image} width="40" height="40" />{character.name}</p>)
         )}
         <button disabled={loading} onClick={() => setPage(page - 1)}>
           Previous
