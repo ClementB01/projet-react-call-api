@@ -2,7 +2,13 @@ import React from 'react';
 import './App.css';
 import './characterContainer.css'
 
+type Info = {
+  count: number
+  pages: number
+}
+
 type Character = {
+  info: Info
   results: Array<{
     id: number
     name: string
@@ -38,6 +44,14 @@ const App: React.FC = () => {
 
   return (
       <div className="App">
+        <div className="divButtonStyle">
+          <button disabled={loading} onClick={() => setPage(page - 1)}>
+            Previous
+          </button>
+          <button disabled={loading} onClick={() => setPage(page + 1)}>
+            Next
+          </button>
+        </div>
         {loading ? (
           <p>Loading...</p>
         ) : (
