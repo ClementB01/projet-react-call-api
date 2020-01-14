@@ -9,8 +9,8 @@ type Character = {
   }>
 }
 
-const getCharacters = () =>
-  fetch(`https://rickandmortyapi.com/api/character/`, {
+const getCharacters = (page = 1) =>
+  fetch(`https://rickandmortyapi.com/api/character/?page=${page}`, {
     headers: { Accept: 'application/json' },
   }).then<Character>(res => res.json())
 
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     let cancel = false
     setLoading(true)
 
-    getCharacters(/*page*/).then(data => {
+    getCharacters(page).then(data => {
       if (!cancel) {
         setCharacters(data)
         setLoading(false)
@@ -33,14 +33,16 @@ const App: React.FC = () => {
     return () => {
       cancel = true
     }
-  }, [/*page*/])
+  }, [page])
 
   return (
       <div className="App">
         {loading ? (
           <p>Loading...</p>
         ) : (
-          characters && characters.results.map(character => <p key={character.id}><img src={character.image} width="40" height="40" />{character.name}</p>)
+          characters && characters.results.map(character => <p key={character.id}>
+            <img src={character.image} width="40" height="40" />{character.name}</p>
+          )
         )}
         <button disabled={loading} onClick={() => setPage(page - 1)}>
           Previous
