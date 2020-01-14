@@ -1,0 +1,25 @@
+.characterContainer {
+    background-color: #E9E9E9;
+    width: 500px;
+    border-radius: 1rem;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-shadow: 10px 5px 5px #E0E0E0;
+}
+
+.imgStyle {
+    margin-bottom: 0.4rem;
+    margin-top: 0.4rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.spanStyle {
+    vertical-align: middle;
+}
+
+.divButtonStyle {
+    text-align: center;
+}

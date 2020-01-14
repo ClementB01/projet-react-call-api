@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './characterContainer.css'
 
 type Character = {
   results: Array<{
@@ -40,16 +41,19 @@ const App: React.FC = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          characters && characters.results.map(character => <p key={character.id}>
-            <img src={character.image} width="40" height="40" />{character.name}</p>
+          characters && characters.results.map(character => <div key={character.id} className="characterContainer">
+            <img className="imgStyle" src={character.image} alt="No image" width="40" height="40" />
+            <span className="spanStyle">{character.name}</span></div>
           )
         )}
-        <button disabled={loading} onClick={() => setPage(page - 1)}>
-          Previous
-        </button>
-        <button disabled={loading} onClick={() => setPage(page + 1)}>
-          Next
-        </button>
+        <div className="divButtonStyle">
+          <button disabled={loading} onClick={() => setPage(page - 1)}>
+            Previous
+          </button>
+          <button disabled={loading} onClick={() => setPage(page + 1)}>
+            Next
+          </button>
+        </div>
       </div>
     )
 }
