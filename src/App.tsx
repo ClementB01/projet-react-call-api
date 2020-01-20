@@ -7,7 +7,7 @@ type Info = {
   pages: number
 }
 
-type Character = {
+type Characters = {
   info: Info
   results: Array<{
     id: number
@@ -19,10 +19,10 @@ type Character = {
 const getCharacters = (page = 1) =>
   fetch(`https://rickandmortyapi.com/api/character/?page=${page}`, {
     headers: { Accept: 'application/json' },
-  }).then<Character>(res => res.json())
+  }).then<Characters>(res => res.json())
 
 const App: React.FC = () => {
-  const [characters, setCharacters] = React.useState<Character| null>(null)
+  const [characters, setCharacters] = React.useState<Characters| null>(null)
   const [loading, setLoading] = React.useState(false)
   const [page, setPage] = React.useState(1)
 
