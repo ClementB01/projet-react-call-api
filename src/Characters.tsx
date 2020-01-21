@@ -16,6 +16,8 @@ import {
 type Info = {
   count: number;
   pages: number;
+  next: string;
+  prev: string;
 };
 
 type Characters = {
@@ -30,10 +32,16 @@ type Characters = {
 const getCharacters = (page: number | string) =>
   fetch(`https://rickandmortyapi.com/api/character/?page=${page}`, {
     headers: { Accept: "application/json" }
-  }).then<Characters>(res => res.json());
+  }).then<Characters>(res => {
+    if (!res.ok) {
+      throw new Error();
+    }
+    return res.json();
+  });
 
 const App: React.FC = () => {
-  const [characters, setCharacters] = React.useState<Characters | null>(null);
+  const [error, setError] = React.useState(false);
+  const [characters, setCharacters] = React.useState<Characters>();
   const [loading, setLoading] = React.useState(false);
   //const [page, setPage] = React.useState(1);
 
@@ -48,12 +56,17 @@ const App: React.FC = () => {
     setLoading(true);
 
     if (p) {
-      getCharacters(p).then(data => {
-        if (!cancel) {
-          setCharacters(data);
-          setLoading(false);
-        }
-      });
+      setError(false);
+      getCharacters(p)
+        .then(data => {
+          if (!cancel) {
+            setCharacters(data);
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          setError(true);
+        });
     }
 
     return () => {
@@ -61,29 +74,32 @@ const App: React.FC = () => {
     };
   }, [p]);
 
-  let buttonNext;
-  if (p < 25) {
-    buttonNext = (
-      <Link to={`/${p + 1}`}>
-        <button disabled={loading}>Next</button>
-      </Link>
-    );
-  } else {
-    buttonNext = <button disabled={true}>Next</button>;
-  }
-
   let buttonPrevious;
-  if (p > 1) {
-    buttonPrevious = (
-      <Link to={`/${p - 1}`}>
-        <button disabled={loading}>Previous</button>
-      </Link>
-    );
-  } else {
-    buttonPrevious = <button disabled={true}>Previous</button>;
+  let buttonNext;
+
+  if (characters) {
+    if (characters.info.prev) {
+      buttonPrevious = (
+        <Link to={`/${p - 1}`}>
+          <button disabled={loading}>Previous</button>
+        </Link>
+      );
+    } else {
+      buttonPrevious = <button disabled={true}>Previous</button>;
+    }
+
+    if (characters.info.next) {
+      buttonNext = (
+        <Link to={`/${p + 1}`}>
+          <button disabled={loading}>Next</button>
+        </Link>
+      );
+    } else {
+      buttonNext = <button disabled={true}>Next</button>;
+    }
   }
 
-  return (
+  return p && !error ? (
     <div className="App">
       <div className="divButtonStyle">
         {buttonPrevious}
@@ -116,6 +132,8 @@ const App: React.FC = () => {
         {buttonNext}
       </div>
     </div>
+  ) : (
+    <Redirect to="/" />
   );
 };
 
