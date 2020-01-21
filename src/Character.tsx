@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,7 +7,8 @@ import {
   Link,
   useRouteMatch,
   useParams,
-  Redirect
+  Redirect,
+  useHistory
 } from "react-router-dom";
 
 type Character = {
@@ -32,6 +32,7 @@ const getCharacter = (id: number | string) =>
   });
 
 const Detail: React.FC = () => {
+  const history = useHistory();
   const [character, setCharacter] = React.useState<Character>();
   const [error, setError] = React.useState(false);
   let { characterId: id } = useParams();
@@ -59,15 +60,13 @@ const Detail: React.FC = () => {
             width="100"
             height="100"
           />
-          <span className="spanStyle">{character.name}</span>
+          <p>Name : {character.name}</p>
           <p>Status : {character.status}</p>
           <p>Species : {character.species}</p>
           <p>Gender : {character.gender}</p>
           <p>Created : {character.created}</p>
           <div className="divButtonStyle">
-            <Link to="/">
-              <button>Back to home page</button>
-            </Link>
+            <button onClick={() => history.goBack()}>Back to home page</button>
           </div>
         </div>
       ) : (

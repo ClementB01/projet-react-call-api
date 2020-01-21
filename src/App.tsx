@@ -1,5 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  Redirect,
+  useHistory
+} from "react-router-dom";
 
 import Characters from "./Characters";
 import Character from "./Character";
