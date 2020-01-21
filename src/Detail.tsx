@@ -29,12 +29,12 @@ const Detail: React.FC = () => {
       <div className="App">
         {character ? (
           <div key={character.id} className="characterContainer">
-            <img className="imgStyle" src={character.image} alt="No image" width="40" height="40" />
+            <img className="imgStyle" src={character.image} alt="No image" width="100" height="100" />
             <span className="spanStyle">{character.name}</span>
-            <div className="spanStyle">Status : {character.status}</div>
-            <div className="spanStyle">Species : {character.species}</div>
-            <div className="spanStyle">Gender : {character.gender}</div>
-            <div className="spanStyle">Created : {character.created}</div>
+            <p>Status : {character.status}</p>
+            <p>Species : {character.species}</p>
+            <p>Gender : {character.gender}</p>
+            <p>Created : {character.created}</p>
           </div>
         ) : (
           <p>No character detail</p>

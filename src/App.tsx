@@ -53,9 +53,9 @@ const App: React.FC = () => {
           </button>
         </div>
         {loading ? (
-          <p>Loading...</p>
+          <p className="loading">Loading...</p>
         ) : (
-          characters && characters.results.map(character => <div key={character.id} className="characterContainer">
+          characters && characters.results.map(character => <div key={character.id} className="characterContainer" onClick={() => setPage(page + 1)}>
             <img className="imgStyle" src={character.image} alt="No image" width="40" height="40" />
             <span className="spanStyle">{character.name}</span></div>
           )
