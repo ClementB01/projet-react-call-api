@@ -1,5 +1,5 @@
 import React from 'react';
-import './detailCharacter.css'
+import './style.css'
 
 import {
   BrowserRouter as Router,
@@ -51,7 +51,7 @@ const Detail: React.FC = () => {
   return id && !error ? (
       <div className="App">
         {character ? (
-          <div key={character.id} className="characterContainer">
+          <div key={character.id} className="characterDetailContainer">
             <img className="imgStyle" src={character.image} alt="No image" width="100" height="100" />
             <span className="spanStyle">{character.name}</span>
             <p>Status : {character.status}</p>
