@@ -33,7 +33,7 @@ const getCharacter = (id: number | string) =>
 
 const Detail: React.FC = () => {
   const [character, setCharacter] = React.useState<Character>()
-  const [error, setError]=React.useState(false)
+  const [error, setError] = React.useState(false)
   let { characterId: id } = useParams();
 
   React.useEffect(() => {
@@ -58,12 +58,19 @@ const Detail: React.FC = () => {
             <p>Species : {character.species}</p>
             <p>Gender : {character.gender}</p>
             <p>Created : {character.created}</p>
+            <div className="divButtonStyle">
+              <Link to="/">
+                <button>
+                  Back to home page
+                </button>
+              </Link>
+            </div>
           </div>
         ) : (
           <p>No character detail</p>
         )}
       </div>
-    ) : <Redirect to="/characters" />
+    ) : <Redirect to="/" />
 }
 
 export default Detail;

@@ -15,12 +15,12 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/characters">
-            <Characters />
-          </Route>
           <Route 
             path={"/character/:characterId"}
             component={Character} />
+          <Route path="/">
+            <Characters />
+          </Route>
         </Switch>
     </Router>
   );
