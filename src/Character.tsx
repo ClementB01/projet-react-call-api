@@ -1,6 +1,16 @@
 import React from 'react';
 import './detailCharacter.css'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  Redirect
+} from "react-router-dom";
+
 type Character = {
     id: number
     name: string
@@ -11,21 +21,34 @@ type Character = {
     created: string
 }
 
-const getCharacter = (id = 12) =>
+
+const getCharacter = (id: number | string) =>
   fetch(`https://rickandmortyapi.com/api/character/${id}`, {
     headers: { Accept: 'application/json' },
-  }).then<Character>(res => res.json())
+  }).then<Character>(res => {
+    if (!res.ok) {
+      throw new Error()
+    }
+    return res.json()})
 
 const Detail: React.FC = () => {
   const [character, setCharacter] = React.useState<Character>()
+  const [error, setError]=React.useState(false)
+  let { characterId: id } = useParams();
 
   React.useEffect(() => {
-    getCharacter().then(data => {
-        setCharacter(data)
-    })
-  })
+    if (id) {
+      getCharacter(id).then(data => {
 
-  return (
+        setCharacter(data)
+      }).catch(() => {
+        setError(true)
+      })
+      
+    }
+  }, [id])
+
+  return id && !error ? (
       <div className="App">
         {character ? (
           <div key={character.id} className="characterContainer">
@@ -40,7 +63,7 @@ const Detail: React.FC = () => {
           <p>No character detail</p>
         )}
       </div>
-    )
+    ) : <Redirect to="/characters" />
 }
 
 export default Detail;
