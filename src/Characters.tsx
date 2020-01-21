@@ -1,11 +1,7 @@
 import React from 'react';
-import './Character';
-import './characterContainer.css';
-import './Characters.css';
+import './style.css';
 
-import {
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type Info = {
   count: number
@@ -60,9 +56,11 @@ const App: React.FC = () => {
         {loading ? (
           <p className="loading">Loading...</p>
         ) : (
-          characters && characters.results.map(character => <Link to={`/character/${character.id}`} className='linkWithoutTextDecoration'><div key={character.id} className="characterContainer">
-            <img className="imgStyle" src={character.image} alt="No image" width="40" height="40" />
-            <span className="spanStyle">{character.name}</span></div></Link>
+          characters && characters.results.map(character => <Link to={`/character/${character.id}`} className='linkWithoutTextDecoration'>
+                <div key={character.id} className="charactersContainer">
+                <img className="imgStyle" src={character.image} alt="No image" width="40" height="40" />
+                <span className="spanStyle">{character.name}</span></div>
+            </Link>
           )
         )}
         <div className="divButtonStyle">
