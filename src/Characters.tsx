@@ -1,6 +1,7 @@
 import "./style.css";
 import React from "react";
 import "./Character";
+import CharacterDiv, {CharacterDivProps} from "./CharacterDiv"
 
 import {
   BrowserRouter as Router,
@@ -27,6 +28,8 @@ type Characters = {
     image: string;
   }>;
 };
+
+
 
 const getCharacters = (page: number | string) =>
   fetch(`https://rickandmortyapi.com/api/character/?page=${page}`, {
@@ -109,21 +112,7 @@ const App: React.FC = () => {
       ) : (
         characters &&
         characters.results.map(character => (
-          <Link
-            to={`/character/${character.id}`}
-            className="linkWithoutTextDecoration"
-          >
-            <div key={character.id} className="charactersContainer">
-              <img
-                className="imgStyle"
-                src={character.image}
-                alt="No image"
-                width="40"
-                height="40"
-              />
-              <span className="spanStyle">{character.name}</span>
-            </div>
-          </Link>
+          <CharacterDiv characterProps = { character }/>
         ))
       )}
       <div className="divButtonStyle">
