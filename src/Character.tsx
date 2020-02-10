@@ -65,7 +65,7 @@ const Detail: React.FC = () => {
           <p>Species : {character.species}</p>
           <p>Gender : {character.gender}</p>
           <p>Created : {character.created}</p>
-          <div className="divButtonStyle">
+          <div className="divButtonStyleDetail">
             <button onClick={() => history.goBack()}>Back to home page</button>
           </div>
         </div>

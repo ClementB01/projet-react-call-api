@@ -59,7 +59,28 @@
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-bottom: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.divButtonStyleDetail {
+  background-color: #E9E9E9;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.btnSearch {
+  position: fixed;
+  right: 0;
+}
+
+.mainContainer {
+  position: relative;
+  margin-top: 5rem;
 }
 
 button {
@@ -84,5 +105,11 @@ button {
 }
 
 .inputSearch {
+  width: 200;
+  height: 50;
+  border-radius: 4px;
+}
 
+.center {
+  text-align: center;
 }
