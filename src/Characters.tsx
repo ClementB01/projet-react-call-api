@@ -106,7 +106,9 @@ const App: React.FC = () => {
       <div className="divButtonStyle">
         {buttonPrevious}
         {buttonNext}
+        {<Link to={`/search`}><button className="btnSearch">Search</button></Link>}
       </div>
+      <div className="mainContainer">
       {loading ? (
         <p className="loading">Loading...</p>
       ) : (
@@ -115,9 +117,6 @@ const App: React.FC = () => {
           <CharacterDiv characterProps = { character }/>
         ))
       )}
-      <div className="divButtonStyle">
-        {buttonPrevious}
-        {buttonNext}
       </div>
     </div>
   ) : (

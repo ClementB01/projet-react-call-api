@@ -17,10 +17,7 @@ export type CharacterDivProps = {
   
 const CharacterDiv: React.FC<CharacterDivProps> = props => {
     return (
-    <Link
-    to={`/character/${props.characterProps.id}`}
-    className="linkWithoutTextDecoration"
-    >
+    <Link to={`/character/${props.characterProps.id}`} className="linkWithoutTextDecoration">
     <div key={props.characterProps.id} className="charactersContainer">
         <img
         className="imgStyle"
