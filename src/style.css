@@ -72,7 +72,17 @@ button {
     text-align: center;
   }
   
-  .linkWithoutTextDecoration {
-    text-decoration: none;
-    color: black;
-  }
+.linkWithoutTextDecoration {
+  text-decoration: none;
+  color: black;
+}
+
+.divSearch {
+  background-color: gray;
+  text-align: center;
+  padding: 10px;
+}
+
+.inputSearch {
+
+}

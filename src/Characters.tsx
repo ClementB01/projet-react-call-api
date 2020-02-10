@@ -1,6 +1,6 @@
-import "./style.css";
 import React from "react";
 import "./Character";
+import "./style.css";
 
 import {
   BrowserRouter as Router,
