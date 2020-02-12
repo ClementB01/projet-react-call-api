@@ -36,6 +36,7 @@ const Detail: React.FC = () => {
   const [character, setCharacter] = React.useState<Character>();
   const [error, setError] = React.useState(false);
   let { characterId: id } = useParams();
+  let date;
 
   React.useEffect(() => {
     if (id) {
@@ -64,7 +65,7 @@ const Detail: React.FC = () => {
           <p>Status : {character.status}</p>
           <p>Species : {character.species}</p>
           <p>Gender : {character.gender}</p>
-          <p>Created : {character.created}</p>
+          <p>Created : {character.created.split("T")[0]}</p>
           <div className="divButtonStyleDetail">
             <button onClick={() => history.goBack()}>Back to home page</button>
           </div>
