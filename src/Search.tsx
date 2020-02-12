@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import CharacterDiv, {CharacterDivProps} from "./CharacterDiv"
 
 import {
   BrowserRouter as Router,
@@ -63,18 +64,8 @@ const Search: React.FC = () => {
         </div>
         <div className="mainContainer">
           {!error ?(
-            characters && characters.results.map(
-            character => (
-              <div key={character.id} className="charactersContainer">
-                <img
-                  className="imgStyle"
-                  src={character.image}
-                  alt="No image"
-                  width="40"
-                  height="40"
-                />
-                <span className="spanStyle">{character.name}</span>
-              </div>
+            characters && characters.results.map(character => (
+              <CharacterDiv characterProps = { character }/>
             )
           )
         ) : (
