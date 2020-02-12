@@ -36,7 +36,6 @@ const Detail: React.FC = () => {
   const [character, setCharacter] = React.useState<Character>();
   const [error, setError] = React.useState(false);
   let { characterId: id } = useParams();
-  let date;
 
   React.useEffect(() => {
     if (id) {
